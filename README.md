@@ -8,7 +8,12 @@ Please see the 2 documents
 
 
 2.d.docx is quick tour on backend api code after creating the tables.
+
+3.If beginner, just follow simple code in Five.txt
+
+
 Commands:
+
 mysql -u root -p
 
 npm init
