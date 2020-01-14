@@ -1,0 +1,142 @@
+mysql -u root -p
+
+use mydb;
+
+CREATE TABLE IF NOT EXISTS `customerTwo` (
+`id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`name` varchar(255) NOT NULL,
+`active` BOOLEAN NOT NULL,
+`street` varchar(100) NOT NULL,
+`zip` varchar(10) NOT NULL,
+`city` varchar(50) NOT NULL,
+`state` varchar(50) NOT NULL,
+`phone` varchar(25) NOT NULL,
+`phone2` varchar(25) NOT NULL,
+`fax` varchar(25),
+`contact` varchar(100) NOT NULL,
+`email` varchar(50) NOT NULL,
+`category` varchar(25) NOT NULL,
+`accoutNumber` varchar(25) NOT NULL,
+`defaultGLAccount` varchar(25) NOT NULL,
+`nameToPrintOnCheck` varchar(30) NOT NULL,
+`mailingName` varchar(30) NOT NULL,
+`mailingStreet` varchar(80) NOT NULL,
+`mailingCityStateZip` varchar(20) NOT NULL,
+`federalIdentificationOrSocialSecurityNumber` varchar(50) NOT NULL
+);
+
+INSERT INTO `customerTwo` (`id`, `name`, `active`, `street`,`zip`,`city`,`state`,`phone`,`phone2`,`fax`,`contact`,`email`,`category`,`accoutNumber`,`defaultGLAccount`,`nameToPrintOnCheck`,`mailingName`,`mailingStreet`,`mailingCityStateZip`,`federalIdentificationOrSocialSecurityNumber`) VALUES
+(1, 'ABC', true, 'West 42nd Street',10036,'New York City','New York',9999888877,9999888878,NULL,'K','abcdD@gmail.com','Buyers',000123456789,000123456788,'xyz','xyz@gmail.com','S1',10037,123
+);
+
+
+
+Now ,the backend.
+
+1.New Project
+
+npm init
+
+
+2.Install dependencies
+
+npm install --save express@4.17.1 mysql@2.17.1 body-parser@1.19.0 mongoose@5.8.4 express-ejs-layouts@2.5.0 req-flash@0.0.3 express-fileupload@0.1.1 then-busboy@1.4.0 connect-flash@0.1.1 express-session@1.17.0 cookie-parser@1.4.4
+
+3.Here index.js is the entry point.Below is the file code.
+
+
+var http = require('http');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var mysql = require('mysql');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+
+// default route
+app.get('/', function (req, res) {
+    return res.send({ error: true, message: 'hello' })
+});
+// connection configurations
+var dbConn = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'krishna',
+  database: 'mydb'
+  /*  host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'node_js_api'
+    */
+});
+
+// connect to database
+dbConn.connect();
+
+
+//rest api to get all results
+app.get('/employees', function (req, res) {
+   console.log(req);
+   dbConn.query('select * from customerTwo', function (error, results, fields) {
+	  if (error) throw error;
+	  res.end(JSON.stringify(results));
+	});
+});
+
+
+
+
+/*post method for create product*/
+app.post('/create', function(req, res, next) {
+  var name = req.body.name;
+  var active = req.body.active;
+  var street = req.body.street;
+  var zip = req.body.zip;
+  var city = req.body.city;
+  var state = req.body.state;
+  var phone = req.body.phone;
+  var phone2 = req.body.phone2;
+  var fax = req.body.fax;
+  var contact = req.body.contact;
+  var email = req.body.email;
+  var category = req.body.category;
+  var accoutNumber = req.body.accoutNumber;
+  var defaultGLAccount = req.body.defaultGLAccount;
+  var nameToPrintOnCheck = req.body.nameToPrintOnCheck;
+  var mailingName = req.body.mailingName;
+  var mailingStreet = req.body.mailingStreet;
+  var mailingCityStateZip = req.body.mailingCityStateZip;
+  var federalIdentificationOrSocialSecurityNumber = req.body.federalIdentificationOrSocialSecurityNumber;
+
+
+
+var sql = `INSERT INTO customerTwo (name, active, street, zip, city, state, phone, phone2, fax, contact, email, category, accoutNumber,  defaultGLAccount, nameToPrintOnCheck, mailingName, mailingStreet, mailingCityStateZip, federalIdentificationOrSocialSecurityNumber) VALUES
+   ("${name}", "${active}", "${street}", "${zip}","${city}","${state}","${phone}","${phone2}","${fax}","${contact}","${email}","${category}","${accoutNumber}","${defaultGLAccount}","${nameToPrintOnCheck}","${mailingName}","${mailingStreet}","${mailingCityStateZip}","${federalIdentificationOrSocialSecurityNumber}")`;
+  dbConn.query(sql, function(err, result) {
+    if(err) {
+      res.status(500).send({ error: 'Something failed!' })
+    }
+    res.json({'status': 'success', id: result.insertId})
+  })
+});
+
+
+
+// set port
+app.listen(3000, function () {
+    console.log('Node app is running on port 3000');
+});
+
+module.exports = app;
+**************************************8**********88888888888888
+
+https://shiya.io/parsing-forms-with-multiple-submit-buttons-in-node-js-with-express-4/
+
+
+https://livebook.manning.com/book/get-programming-with-node-js/chapter-22/19
+
+https://stackoverflow.com/questions/23160743/how-to-send-flash-messages-in-express-4-0
