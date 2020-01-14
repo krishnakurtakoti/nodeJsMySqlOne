@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AddingVendor_General</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <h1>Create New Vendor</h1>
+    <% if(locals.messageSuccess){ %>
+      <div class="alert alert-success" role="alert">
+          <strong>Success!</strong> <%=messageSuccess.successMessage%>
+      </div>
+  <% } %>
+<form method="post" name="form1">
+  <div class="form-group row">
+    <div class="col-sm-1 mt-1"><label for="name">Name:</label></div>
+    <div class="col-sm-6"><input type="text" class="form-control" name="name" required></div>
+    <div class="col-sm-5">
+
+    <input type="radio" name="isActive" value="1" checked > Active<br>
+    <input type="radio" name="isActive" value="0"> Inactive<br>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1 mt-1"><label for="street">Street:</label></div>
+    <div class="col-sm-11"><input type="text" class="form-control" name="street" required></div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1 mt-1"><label for="zip">Zip:</label></div>
+    <div class="col-sm-3"><input type="text" class="form-control" name="zip" required></div>
+    <div class="col-sm-1 mt-1"><label for="city">City:</label></div>
+    <div class="col-sm-3"><input type="text" class="form-control" name="city" required></div>
+    <div class="col-sm-1 mt-1"><label for='state'>State:</label></div>
+    <div class="col-sm-3"><input type="text" class="form-control" name="state" required></div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1 mt-1"><label for="phone">Phone:</label></div>
+    <div class="col-sm-7"><input type="text" class="form-control" name="phone"></div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1 mt-1"><label for="phone">Phone2:</label></div>
+    <div class="col-sm-7"><input type="text" class="form-control" name="phoneTwo"></div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1 mt-1"><label for="fax">Fax:</label></div>
+    <div class="col-sm-7"><input type="text" class="form-control" name="fax"></div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1 mt-1"><label for="contact">Contact:</label></div>
+    <div class="col-sm-7"><input type="text" class="form-control" name="contact"></div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1 mt-1"><label for="email">Email:</label></div>
+    <div class="col-sm-11"><input type="text" class="form-control" name="email" required></div>
+  </div>
+
+
+      <div class="col-sm-1 mt-1"><label for="email">Select Category</label></div>
+
+    <div class="col-md-3"><select name="categoryId" class="form-control form-control-primary" >
+        <option value="1">Buyers</option>
+        <option value="2">Type 2</option>
+        <option value="3">Type 3</option>
+        <option value="opt4">Type 4</option>
+        <option value="opt5">Type 5</option>
+        <option value="opt6">Type 6</option>
+        <option value="opt7">Type 7</option>
+        <option value="opt8">Type 8</option>
+      </select></div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-3 mt-1"><label for="anumber">Account Number:</label></div>
+    <div class="col-sm-6"><input type="text" class="form-control" name="accountNumber"></div>
+  </div>
+  <div class="form-group row mt-3">
+    <div class="col-md-3 col-sm-5 mt-1"><label for="g/l">Default G/L Account:</label></div>
+    <div class="col-sm-5"><input type="text" class="form-control" name="defaultGLAccount"><small>(Only used when entering bills to
+        pay)</small></div>
+  </div>
+  <div class="form-group row">
+    <div class="col-md-3 col-sm-5 mt-1"><label for="print">Name to print on check/1099:</label></div>
+    <div class="col-sm-5"><input type="text" class="form-control" name="nameToPrintOnCheckOr1099"></div>
+  </div>
+  <div class="form-group row">
+    <div class="col-md-3 col-sm-1 mt-1"><label for="mailing name">Mailing Name:</label></div>
+    <div class="col-md-7"><input type="text" class="form-control" name="mailingName"></div>
+  </div>
+  <div class="form-group row">
+    <div class="col-md-3 col-sm-1 mt-1"><label for="mailing street">Mailing Street:</label></div>
+    <div class="col-md-7"><input type="text" class="form-control" name="mailingStreet"></div>
+  </div>
+  <div class="form-group row">
+    <div class="col-md-3 col-sm-1 mt-1"><label for="mailing city">Mailing city,
+        state,
+        zip:</label></div>
+    <div class="col-md-9"><input type="text" class="form-control" name="mailingCityStateZip"><input type="checkbox">Prompt to print an
+      envelope after printing a check to this vendor <small>(Option on check printing window must also be
+        enabled)</small></div>
+  </div>
+  <div class="form-group row mt-3">
+    <div class="col-md-4"><label for="security">Federal Identification or Social Security Number:</label>
+    </div>
+    <div class="col-md-5"><input type="text" class="form-control" name="socialSecurityNumber"></div>
+    <div class="col-md-3"><select name="isNon1099Vendor" class="form-control form-control-primary" name="">
+        <option value="1">Non 1099 vendor</option>
+        <option value="0">Type 2</option>
+        <option value="0">Type 3</option>
+
+      </select></div>
+
+
+  </div>
+  <div class="p-envelope"><button class="btn btn-primary">Print envelope</button></div>
+  <div class="m-vendor">
+    <p>Notes</p><textarea class="form-control max-textarea" maxlength="255" rows="10" name="notes"></textarea><button
+      class="btn btn-primary text-white">Merge This Vendor With Another</button>
+  </div>
+  <!-- buttons -->
+  <div class="buttons mt-5 last-btn">
+
+    <div class="btns d-inline-block"><button class="btn btn-success" formaction="/save_addingVendor_General"><i
+          class="icofont icofont-check-circled"></i>Save</button><button class="btn btn-danger"><i
+          class="icofont icofont-close"></i>Cancel</button><button class="btn btn-primary"><i
+          class="icofont icofont-bill"></i>Print Vendor Cost</button></div>
+  </div>
+  <!-- buttons -->
+
+</form>
+</div>
+</body>
+</html>

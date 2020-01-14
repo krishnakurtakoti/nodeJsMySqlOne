@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AddingVehicle_General</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+
+
+  <% if(locals.messageSuccess){ %>
+    <div class="alert alert-success" role="alert">
+        <strong>Success!</strong> <%=messageSuccess.successMessage%>
+    </div>
+<% } %>
+<div class="row">
+    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-xs-12">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs  tabs" role="tablist">
+                                <li class="nav-item active"><a class="nav-link" data-toggle="tab"
+                                    href="#general" role="tab">
+                                    General</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                    href="#floor_planning" role="tab">
+                                    Floor Planning</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                    href="#sales" role="tab">
+                                    Sales</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                        href="#prev_owner" role="tab">
+                                        Previous Owner</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                        href="#photos" role="tab">
+                                        Photos</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                        href="#notes" role="tab">
+                                        Notes</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                        href="#vehicle-bills" role="tab">
+                                        Vehicle Bills</a></li>
+                                    <button class="btn text-danger">Print</button>
+                                    <button class="btn text-success">Print G/L</button>
+
+                            </ul>
+                        </div>
+
+
+                        <div class="tab-content tabs card-block">
+                            <div class="tab-pane active" id="general" role="tabpanel">
+                          <form method="post" name="formVeh">
+                            <div class="row">
+                                <div class="col-xl-7 border pt-3">
+                                    <p class="pt-3"><strong>Vehicle Information</strong></p>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-4 form-group">
+                                          <!--
+                                            <label>Stock #</label>
+                                            <input type="text" class="form-control" placeholder="Enter Stock Information" name="stockNumber" required>
+                                            --->
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <label>Mileage</label>
+                                           <div class="form-inline">
+                                            <input type="text" class="form-control" placeholder="Enter Mileage" name="mileage" required>
+                                            <label class="form-check-label ml-3">
+                                              <label>isExempt</label>
+                                              <input type="radio" name="isExempt" value="1">  True<br>
+                                              <input type="radio" name="isExempt" value="0" checked> False<br>
+                                            <!--    <input class="form-check-input" type="checkbox" name="isExempt" id="" value="1"> EXEMPT? -->
+                                            </label>
+                                           </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Location Code</label>
+                                            <input type="text" class="form-control" name="locationCode" placeholder="Enter Stock Information">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Mileage is</label>
+                                            <select class="form-control" name="mileageIs" id="">
+                                                <option>actual</option>
+                                                <option>actual1</option>
+                                              </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-12 form-group">
+                                            <label>New/Used/Rebuilt</label>
+                                            <div class="form-inline">
+                                                <select class="form-control" name="newOrUseOrRebuilt" id="">
+                                                    <option>Used</option>
+                                                    <option>New</option>
+                                                    <option>Rebuilt</option>
+                                                  </select>
+                                                  <label class="form-check-label ml-3">
+                                                    <label>Certified? </label>
+                                                    <input type="radio" name="isCertified" value="1" checked>  True<br>
+                                                    <input type="radio" name="isCertified" value="0"> False<br>
+                                                <!--    <input class="form-check-input" type="checkbox" name="isCertified" id="" value="1"> Certified?  -->
+                                                </label>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>VIN</label>
+                                            <input type="text" class="form-control" name="vin" placeholder="Enter VIN">
+                                        </div>
+                                        <div class="col-md-6 form-check form-check-inline">
+                                            <label>Year</label>
+                                            <input type="text" class="form-control" name="year" placeholder="Enter Year">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Transmission</label>
+                                            <select class="form-control" name="transmission" id="">
+                                                <option>Automatic</option>
+                                                <option>Manual</option>
+                                              </select>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Trans Speed</label>
+                                            <input type="text" class="form-control" name="transpeed" placeholder="Enter Trans Speed">
+                                        </div>
+                                    </div>
+
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Make</label>
+                                            <input type="text" class="form-control" name="make" placeholder="Enter Make">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Drivetrain</label>
+                                            <input type="text" class="form-control" name="driveTrain" placeholder="Enter Drivetrain">
+                                        </div>
+                                    </div>
+
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Model</label>
+                                            <input type="text" class="form-control" name="model" placeholder="Enter Model">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Engine Cylinders</label>
+                                            <input type="text" class="form-control" name="engineCylinders" placeholder="Enter Engine Cylinders">
+                                        </div>
+
+                                    </div>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Style</label>
+                                            <input type="text" class="form-control" name="style" placeholder="Enter Style">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Engine Size</label>
+                                            <input type="text" class="form-control" name="engineSize" placeholder="Enter Engine Size">
+                                        </div>
+
+                                    </div>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Body Type</label>
+                                            <input type="text" class="form-control" name="bodyType" placeholder="Enter Body Type">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Vehicle Type</label>
+                                            <select class="form-control" name="vehType" id="">
+                                                <option>Sedan</option>
+                                              </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Exterior Colour</label>
+                                            <input type="text" class="form-control" name="exteriorColor" placeholder="Enter Exterior Colour">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Condition</label>
+                                            <select class="form-control" name="vehCondition" id="">
+                                                <option>Condition</option>
+                                              </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Exterior Colour 2</label>
+                                            <input type="text" class="form-control" name="exteriorColorTwo" placeholder="Enter Exterior Colour">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Weight</label>
+                                            <input type="text" class="form-control" name="vehWeight" placeholder="Enter Weight">
+                                        </div>
+
+                                    </div>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Colour Description</label>
+                                            <input type="text" class="form-control" name="colorDescription" placeholder="Enter Colour Description">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Interior Colour</label>
+                                            <input type="text" class="form-control"  name="interiorColor" placeholder="Enter Interior Colour">
+                                        </div>
+
+                                    </div>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Tag</label>
+                                            <input type="text" class="form-control" name="tag" placeholder="Enter Tag">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Expiration Date</label>
+                                            <input type="date" class="form-control" name="expirationDate" placeholder="Enter Expiration Date">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Decal #</label>
+                                            <input type="text" class="form-control" name="decalNumber" placeholder="Enter Decal">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Fuel Type</label>
+                                            <select class="form-control" name="fuelType" id="">
+                                                <option>Gas</option>
+                                              </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>County</label>
+                                            <input type="text" class="form-control" name="county" placeholder="Enter Country">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>MPG Combined</label>
+                                            <input type="text" class="form-control" name="mpgCombined" placeholder="Enter MPG Combined">
+                                        </div>
+
+                                    </div>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Title Application #</label>
+                                            <input type="text" class="form-control" name="titleApplication" placeholder="Enter Title Application">
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label>MPG City</label>
+                                            <input type="text" class="form-control" name="mpgCity" placeholder="Enter MPG City">
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label>MPG Highway</label>
+                                            <input type="text" class="form-control" name="mpgHighway" placeholder="Enter MPG Highway">
+                                        </div>
+                                    </div>
+
+                                    <div class="p-o-info row">
+                                        <div class="col-md-12 form-group">
+                                            <label>State Title In</label>
+
+                                            <div class="form-inline">
+                                                <input type="text" class="form-control" name="stateTitleIn" placeholder="stateTitleIn">
+                                                <label class="form-check-label ml-3">
+                                                  <label>Tilte In? </label>
+                                                  <input type="radio" name="isTitleIn" value="1" checked >  True<br>
+                                                  <input type="radio" name="isTitleIn" value="0"> False<br>
+                                                <!--    <input class="form-check-input" type="checkbox" name="isTitleIn" id="" value="1"> Tilte In?  -->
+                                                </label>
+                                               </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Title #</label>
+                                            <input type="text" class="form-control" name="titleNumber" placeholder="Enter Title">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Ignition Key Code</label>
+                                            <input type="text" class="form-control" name="ignitionKeyCode" placeholder="Enter Ignition Key Code">
+                                        </div>
+
+                                    </div>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Door Key Code</label>
+                                            <input type="text" class="form-control" name="doorKeyCode" placeholder="Enter Door Key Code">
+                                        </div>
+
+                                    </div>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Inspection #</label>
+                                            <input type="text" class="form-control" name="inspectionNumber" placeholder="Enter Inspection">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Valet Key Code</label>
+                                            <input type="text" class="form-control" name="valetKeyCode" placeholder="Enter Valet Key Code">
+                                        </div>
+
+                                    </div>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-12 form-group">
+                                            <label>Inspection Date</label>
+                                            <div class="form-inline">
+                                                <input type="date" class="form-control" name="inspectionDate" placeholder="Enter Inspection">
+                                                <label class="form-check-label ml-3">
+                                                  <label>Inspected?  </label>
+                                                  <input type="radio" name="isInspected" value="1" checked>  True<br>
+                                                  <input type="radio" name="isInspected" value="0"> False<br>
+                                                  <!--  <input class="form-check-input" type="checkbox" name="isInspected" id="" value="1"> Inspected?  -->
+                                                </label>
+                                                <label class="form-check-label ml-3">
+                                                  <label>Duplicate Keys? </label>
+                                                  <input type="radio" name="isDuplicateKeys" value="1" checked>  True<br>
+                                                  <input type="radio" name="isDuplicateKeys" value="0"> False<br>
+                                                <!--    <input class="form-check-input" type="checkbox" name="isDuplicateKeys" id="" value="1"> Duplicate Keys?  -->
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-o-info row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Inspected By</label>
+                                            <input type="text" class="form-control" name="inspectedBy" placeholder="Enter Inspected By">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>GPS Serial #</label>
+                                            <input type="text" class="form-control" name="gpsSerialNumber" placeholder="Enter GPS Serial">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-5 pt-3 border">
+                                   <div class="row">
+                                    <div class="col-md-12 pb-3">
+                                        <p class="pt-3"><strong>Vehicle Cost</strong></p>
+                                      <table align="center" class="table-sm" style="text-align: right;">
+                                          <tr>
+                                            <td>Purchased Date</td>
+                                            <td><input type="date" name="purchaseDate" class="form-control" required></td>
+                                          </tr>
+                                          <tr>
+                                            <td>Original Cost</td>
+                                            <td><input type="text" name="originalCost" class="form-control" placeholder="0.00" required></td>
+                                          </tr>
+                                          <tr>
+                                            <td>Buyer's fee</td>
+                                            <td><input type="text" name="buyersFee" class="form-control" placeholder="0.00" required></td>
+                                          </tr>
+                                          <tr>
+                                            <td>Lot fee</td>
+                                            <td><input type="text" name="lotFee" class="form-control" placeholder="0.00" required></td>
+                                          </tr>
+                                          <tr>
+                                            <td>Added Cost</td>
+                                            <td><input type="number" name="addedCosts" class="form-control" placeholder="0.00" required></td>
+                                          </tr>
+                                          <tr>
+                                            <td>Floor plan Cost</td>
+                                            <td><input type="text" name="floorPlanCost" class="form-control" placeholder="0.00" required></td>
+                                          </tr>
+                                          <tr>
+                                              <td colspan="2"><hr></td>
+                                          </tr>
+                                          <tr>
+                                            <td>Total Cost Cost</td>
+                                            <td><input type="text" name="totalCosts" class="form-control" placeholder="0.00" required></td>
+                                          </tr>
+                                      </table>
+
+                                     </div>
+                                    </div>
+
+                                   <div class="row">
+                                       <div class="col-md-12 border" style="min-height: 200px;">
+                                            <p class="pt-3"><strong>How did you pay for the vehicle ?</strong></p>
+                                            <input type="text" name="howDidYouPay" class="form-control" placeholder="">
+                                       </div>
+                                   </div>
+                                   <div class="row">
+
+                                         <p class="pl-3 pt-3"><strong>Purchase Information ?</strong></p>
+                                         <table align="center" class="table-sm" style="text-align: right;">
+                                            <tr>
+                                               <td>Vehicle Source</td>
+                                               <td>
+                                                  <select name="vehicleSource" class="form-control">
+                                                        <option>Company</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                              <td>VendorId</td>
+                                              <td>
+                                                <div class="input-group">
+                                                    <input name="vendorId"  type="number" class="form-control" required>
+                                                    <div class="input-group-append">
+                                                        <button class="btn" style="border: 1px solid #aaa;">...</button>
+                                                    </div>
+                                                </div>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>Buyer</td>
+                                              <td>
+                                                <div class="input-group">
+                                                    <input type="text" name="buyer" class="form-control">
+                                                    <div class="input-group-append">
+                                                        <button class="btn" style="border: 1px solid #aaa;">...</button>
+                                                    </div>
+                                                </div>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>Notes</td>
+                                              <td><input type="text" name="notes" class="form-control"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="form-check-label ml-3">
+                                                      <label>Draft?  </label>
+                                                      <input type="radio" name="isDraft" value="1" checked>  True<br>
+                                                      <input type="radio" name="isDraft" value="0"> False<br>
+                                                <!--    <input class="form-check-input" type="checkbox" name="isDraft" id="" value="1"> Draft?  -->
+                                                    </label>
+                                                  <!--  <label class="text-muted">Draft #</label> -->
+                                                      <label class="text">Draft #</label>
+                                                </td>
+                                                <td>
+                                                  <!--  <input type="text" disabled class="form-control"> -->
+                                                   <input type="text" name="draftNumber" class="form-control">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <!---
+                                                <td class="text-muted">Date Paid</td class="text-muted">
+                                                <td><input type="date" disabled class="form-control"></td>
+                                                --->
+                                                <td class="text">Date Paid</td class="text">
+                                                <td><input type="date" name="datePaid"  class="form-control"></td>
+                                              </tr>
+                                              <tr>
+                                                <td></td>
+                                                <td><button class="btn btn-info pt-3 pb-3"><i class="feather icon-printer" aria-hidden="true"></i> Bill of scale</button></td>
+                                              </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="last-btn text-center save-exit">
+                                <button class="btn btn-primary" formaction="/createAddingVehicleGeneralFourteen"><i class="icofont icofont-tick-mark"></i>Save
+                                    Vehicle</button>
+                                <button class="btn btn-danger"><i class="icofont icofont-close-line"></i>Exit-Do not
+                                    save</button>
+                            </div>
+
+                            </div>
+                        </form>
+
+                            </div>
+
+
+                          </div>
+                          </body>
+                          </html>

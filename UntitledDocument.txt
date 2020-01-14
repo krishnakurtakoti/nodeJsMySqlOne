@@ -1,0 +1,760 @@
+<% if (typeof errorMessage != 'undefined' && errorMessage) { %>
+<div class="alert alert-danger"><%- errorMessage %></div>
+<% } else if(typeof successMessage != 'undefined' && successMessage) { %>
+<div class="alert alert-success"><%- successMessage %></div>
+<% } %>
+
+
+CREATE TABLE `addingVendor_BillHistoryB` (
+`id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`stockNumberId` int(11) DEFAULT NULL,
+`vendorId` int(11) DEFAULT NULL,
+`isAddToBill` int(11) NOT NULL,
+`date` varchar(20) NOT NULL,
+`dateDue` varchar(20) NOT NULL,
+`datePaid` varchar(20),
+`amount` DECIMAL(10,2) NOT NULL,
+`invoice` varchar(50) NOT NULL,
+`status` varchar(50),
+`checkNumber` varchar(50),
+`isCleared` BOOLEAN DEFAULT 0,
+`checkMemo` varchar(200),
+FOREIGN KEY (`stockNumberId`) REFERENCES `addingVehicle_GeneralTen` (`stockNumber`) ON DELETE SET NULL ON UPDATE CASCADE,
+ FOREIGN KEY (`vendorId`) REFERENCES `vendorGeneralInformationC` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `addingVendor_addedCosts` (
+`id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`date` varchar(30),
+`cost` DECIMAL(10,2) DEFAULT '0.00',
+`vehicleId` int(11) DEFAULT NULL,
+`description` varchar(400),
+`ticket` varchar(50),
+`gl` int(11) DEFAULT NULL,
+`vendorId` int(11) DEFAULT NULL,
+FOREIGN KEY (`vendorId`) REFERENCES `vendorGeneralInformationC` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+FOREIGN KEY (`vehicleId`) REFERENCES `addingVehicle_GeneralTen` (`stockNumber`) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `addingVendor_addedCosts` (
+`id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`date` varchar(30),
+`cost` DECIMAL(10,2) DEFAULT '0.00',
+`vehicleId` int(11) DEFAULT NULL,
+`description` varchar(400),
+`ticket` varchar(50),
+`gl` int(11) DEFAULT NULL,
+`vendorId` int(11) DEFAULT NULL,
+FOREIGN KEY (`vendorId`) REFERENCES `vendorGeneralInformationC` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+FOREIGN KEY (`vehicleId`) REFERENCES `addingVehicle_GeneralFourteen` (`stockNumber`) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+`stockNumber`
+
+select name, isActive, street, zip, city, state, phone, phoneTwo, fax, contact, email, categoryId, accountNumber, defaultGLAccount from vendorGeneralInformationC
+
+
+var vendorId = req.body.vendorId;
+var stockNumberId = req.body.stockNumberId;
+var isAddToBill = req.body.isAddToBill;
+var date = req.body.date;
+var dateDue = req.body.dateDue;
+var datePaid = req.body.datePaid;
+var amount = req.body.amount;
+var invoice = req.body.invoice;
+var status = req.body.status;
+var checkNumber = req.body.checkNumber;
+var isCleared = req.body.isCleared;
+var checkMemo = req.body.checkMemo;
+
+CREATE TABLE `vendorGeneralInformationC` (
+`id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`name` varchar(50) NOT NULL,
+`isActive` BOOLEAN NOT NULL,
+`street` varchar(80) NOT NULL,
+`zip` varchar(20) NOT NULL,
+`city` varchar(30) NOT NULL,
+`state` varchar(30) NOT NULL,
+`phone` varchar(20),
+`phoneTwo` varchar(20),
+`fax` varchar(20),
+`contact` varchar(50),
+`email` varchar(50) NOT NULL,
+`categoryId` int(11) DEFAULT NULL,
+`accountNumber` varchar(30),
+`defaultGLAccount` varchar(30),
+`nameToPrintOnCheckOr1099` varchar(50),
+`mailingName` varchar(50),
+`mailingStreet` varchar(80),
+`mailingCityStateZip` varchar(80),
+`socialSecurityNumber` varchar(20),
+`isNon1099Vendor` BOOLEAN NOT NULL,
+`notes` varchar(400),
+
+
+FOREIGN KEY (`categoryId`) REFERENCES `categoryTest` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+INSERT INTO vendorGeneralInformationC(name,isActive,street,zip,city,state,email,categoryId,isNon1099Vendor) VALUES
+('Krishna',1,'JJ nagar','99','BANGORE','Maine','abcd@gmail.com',1,0);
+
+
+mysql> CREATE TABLE `addingVehicle_GeneralTen` (
+    -> `stockNumber` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    -> `mileage` int(10) DEFAULT 0,
+    -> `isExempt` BOOLEAN DEFAULT 0,
+    -> `locationCode` varchar(50),
+    -> `mileageIs` varchar(50),
+    -> `newOrUseOrRebuilt` varchar(20),
+    -> `isCertified` BOOLEAN DEFAULT 1,
+    -> `vin` varchar(20),
+    -> `year` varchar(20),
+    -> `transmission` varchar(20),
+    -> `transpeed` varchar(20),
+    -> `driveTrain` varchar(20),
+    -> `make` varchar(20),
+    -> `model` varchar(20),
+    -> `style` varchar(20),
+    -> `bodyType` varchar(20),
+    -> `exteriorColor` varchar(20),
+    -> `exteriorColorTwo` varchar(20),
+    -> `colorDescription` varchar(20),
+    -> `interiorColor` varchar(20),
+    -> `tag` varchar(20),
+    -> `decalNumber` varchar(20),
+    -> `county` varchar(30),
+    -> `titleApplication` varchar(50),
+    -> `stateTitleIn` varchar(30),
+    -> `isTitleIn` BOOLEAN DEFAULT 0,
+    -> `titleNumber` varchar(50),
+    -> `inspectionNumber` varchar(50),
+    -> `inspectionDate` varchar(20),
+    -> `inspectedBy` varchar(50),
+    -> `gpsSerialNumber` varchar(50),
+    -> `engineCylinders` varchar(20),
+    -> `engineSize` varchar(20),
+    -> `vehType` varchar(20),
+    -> `vehCondition` varchar(20),
+    -> `vehWeight` varchar(20),
+    -> `expirationDate` varchar(20),
+    -> `fuelType` varchar(20),
+    -> `mpgCombined` varchar(20),
+    -> `mpgCity` varchar(20),
+    -> `mpgHighway` varchar(20),
+    -> `ignitionKeyCode` varchar(30),
+    -> `doorKeyCode` varchar(30),
+    -> `valetKeyCode` varchar(30),
+    -> `isInspected` BOOLEAN DEFAULT 0,
+    -> `isDuplicateKeys` BOOLEAN DEFAULT 1,
+    -> `purchaseDate` varchar(30),
+    -> `originalCost` DECIMAL(10,2) DEFAULT '0.00',
+    -> `buyersFee` DECIMAL(10,2) DEFAULT '0.00',
+    -> `lotFee` DECIMAL(10,2) DEFAULT '0.00',
+    -> `addedCosts` DECIMAL(10,2) DEFAULT '0.00',
+    -> `floorPlanCost` DECIMAL(10,2) DEFAULT '0.00',
+    -> `totalCosts` DECIMAL(10,2) DEFAULT '0.00',
+    -> `howDidYouPay` varchar(50) NULL,
+    -> `vehicleSource` varchar(50) DEFAULT 'Company',
+    -> `vendorId` int(11) DEFAULT NULL,
+    -> `buyer` varchar(50),
+    -> `notes` varchar(400),
+    -> `isDraft` BOOLEAN DEFAULT 1,
+    -> `draftNumber` varchar(50),
+    -> `datePaid` varchar(50),
+    -> FOREIGN KEY (`vendorId`) REFERENCES `vendorGeneralInformationC` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+    ->
+    -> )ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+Query OK, 0 rows affected (0.37 sec)
+
+mysql> insert into addingVehicle_GeneralTen (stockNumber) values (1006);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+
+
+insert into addingVehicle_GeneralEleven (stockNumber) values (1006);
+
+CREATE TABLE `addingVehicle_GeneralEleven` (
+`stockNumber` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`mileage` int(10) DEFAULT 0,
+`isExempt` BOOLEAN DEFAULT 0,
+`locationCode` varchar(50),
+`mileageIs` varchar(50),
+`newOrUseOrRebuilt` varchar(20),
+`isCertified` BOOLEAN DEFAULT 1,
+`vin` varchar(20),
+`year` varchar(20),
+`transmission` varchar(20),
+`transpeed` varchar(20),
+`driveTrain` varchar(20),
+`make` varchar(20),
+`model` varchar(20),
+`style` varchar(20),
+`bodyType` varchar(20),
+`exteriorColor` varchar(20),
+`exteriorColorTwo` varchar(20),
+`colorDescription` varchar(20),
+`interiorColor` varchar(20),
+`tag` varchar(20),
+`decalNumber` varchar(20),
+`county` varchar(30),
+`titleApplication` varchar(50),
+`stateTitleIn` varchar(30),
+`isTitleIn` BOOLEAN DEFAULT 0,
+`titleNumber` varchar(50),
+`inspectionNumber` varchar(50),
+`inspectionDate` varchar(20),
+`inspectedBy` varchar(50),
+`gpsSerialNumber` varchar(50),
+`engineCylinders` varchar(20),
+`engineSize` varchar(20),
+`vehType` varchar(20),
+`vehCondition` varchar(20),
+`vehWeight` varchar(20),
+`expirationDate` varchar(20),
+`fuelType` varchar(20),
+`mpgCombined` varchar(20),
+`mpgCity` varchar(20),
+`mpgHighway` varchar(20)
+
+)ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+
+
+Query OK, 0 rows affected (0.31 sec)
+
+
+insert into addingVehicle_GeneralEleven (stockNumber) values (1006);
+
+
+CREATE TABLE `addingVehicle_GeneralThirteen` (
+`stockNumber` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`ignitionKeyCode` varchar(30),
+`doorKeyCode` varchar(30),
+`valetKeyCode` varchar(30),
+`isInspected` BOOLEAN DEFAULT 0,
+`isDuplicateKeys` BOOLEAN DEFAULT 1,
+`purchaseDate` varchar(30),
+`originalCost` DECIMAL(10,2) DEFAULT '0.00',
+`buyersFee` DECIMAL(10,2) DEFAULT '0.00',
+`lotFee` DECIMAL(10,2) DEFAULT '0.00',
+`addedCosts` DECIMAL(10,2) DEFAULT '0.00',
+`floorPlanCost` DECIMAL(10,2) DEFAULT '0.00',
+`totalCosts` DECIMAL(10,2) DEFAULT '0.00',
+`howDidYouPay` varchar(50),
+`vehicleSource` varchar(50) DEFAULT 'Company',
+`vendorId` int(11) DEFAULT NULL,
+`buyer` varchar(50),
+`notes` varchar(400),
+`isDraft` BOOLEAN DEFAULT 1,
+`draftNumber` varchar(50),
+`datePaid` varchar(50),
+FOREIGN KEY (`vendorId`) REFERENCES `vendorGeneralInformationC` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+
+insert into addingVehicle_GeneralTwelve (stockNumber) values (1006);
+insert into addingVehicle_GeneralThirteen (stockNumber) values (1006);
+insert into addingVehicle_GeneralFourteen (stockNumber) values (1006);
+
+CREATE TABLE `addingVehicle_GeneralFourteen` (
+`stockNumber` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`mileage` int(10) DEFAULT 0,
+`isExempt` BOOLEAN DEFAULT 0,
+`locationCode` varchar(50),
+`mileageIs` varchar(50),
+`newOrUseOrRebuilt` varchar(20),
+`isCertified` BOOLEAN DEFAULT 1,
+`vin` varchar(20),
+`year` varchar(20),
+`transmission` varchar(20),
+`transpeed` varchar(20),
+`driveTrain` varchar(20),
+`make` varchar(20),
+`model` varchar(20),
+`style` varchar(20),
+`bodyType` varchar(20),
+`exteriorColor` varchar(20),
+`exteriorColorTwo` varchar(20),
+`colorDescription` varchar(20),
+`interiorColor` varchar(20),
+`tag` varchar(20),
+`decalNumber` varchar(20),
+`county` varchar(30),
+`titleApplication` varchar(50),
+`stateTitleIn` varchar(30),
+`isTitleIn` BOOLEAN DEFAULT 0,
+`titleNumber` varchar(50),
+`inspectionNumber` varchar(50),
+`inspectionDate` varchar(20),
+`inspectedBy` varchar(50),
+`gpsSerialNumber` varchar(50),
+`engineCylinders` varchar(20),
+`engineSize` varchar(20),
+`vehType` varchar(20),
+`vehCondition` varchar(20),
+`vehWeight` varchar(20),
+`expirationDate` varchar(20),
+`fuelType` varchar(20),
+`mpgCombined` varchar(20),
+`mpgCity` varchar(20),
+`mpgHighway` varchar(20),
+`ignitionKeyCode` varchar(30),
+`doorKeyCode` varchar(30),
+`valetKeyCode` varchar(30),
+`isInspected` BOOLEAN DEFAULT 0,
+`isDuplicateKeys` BOOLEAN DEFAULT 1,
+`purchaseDate` varchar(30),
+`originalCost` DECIMAL(10,2) DEFAULT '0.00',
+`buyersFee` DECIMAL(10,2) DEFAULT '0.00',
+`lotFee` DECIMAL(10,2) DEFAULT '0.00',
+`addedCosts` DECIMAL(10,2) DEFAULT '0.00',
+`floorPlanCost` DECIMAL(10,2) DEFAULT '0.00',
+`totalCosts` DECIMAL(10,2) DEFAULT '0.00',
+`howDidYouPay` varchar(50),
+`vehicleSource` varchar(50) DEFAULT 'Company',
+`vendorId` int(11) DEFAULT NULL,
+`buyer` varchar(50),
+`notes` varchar(400),
+`isDraft` BOOLEAN DEFAULT 1,
+`draftNumber` varchar(50),
+`datePaid` varchar(50),
+FOREIGN KEY (`vendorId`) REFERENCES `vendorGeneralInformationC` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+
+
+
+
+CREATE TABLE `addingVehicle_GeneralFifteen` (
+`stockNumber` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`mileage` int(10) DEFAULT 0,
+`isExempt` BOOLEAN DEFAULT 0,
+`locationCode` varchar(50),
+`mileageIs` varchar(50),
+`newOrUseOrRebuilt` varchar(20),
+`isCertified` BOOLEAN DEFAULT 1,
+`vin` varchar(20),
+`year` varchar(20),
+`transmission` varchar(20),
+`make` varchar(20),
+`model` varchar(20),
+`style` varchar(20),
+`bodyType` varchar(20),
+`exteriorColor` varchar(20),
+`exteriorColorTwo` varchar(20),
+`colorDescription` varchar(20),
+`interiorColor` varchar(20),
+`tag` varchar(20),
+`decalNumber` varchar(20),
+`county` varchar(30),
+`titleApplication` varchar(50),
+`stateTitleIn` varchar(30),
+`isTitleIn` BOOLEAN DEFAULT 0,
+`titleNumber` varchar(50),
+`inspectionNumber` varchar(50),
+`inspectionDate` varchar(20),
+`isInspected` BOOLEAN DEFAULT 0,
+`isDuplicateKeys` BOOLEAN DEFAULT 1,
+`inspectedBy` varchar(50),
+`gpsSerialNumber` varchar(50)
+
+)ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+
+insert into addingVehicle_GeneralFifteen (stockNumber) values (1006);
+
+
+CREATE TABLE `addingVehicle_GeneralSixteen` (
+`stockNumber` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`transpeed` varchar(20),
+`driveTrain` varchar(20),
+`engineCylinders` varchar(20),
+`engineSize` varchar(20),
+`vehType` varchar(20),
+`vehCondition` varchar(20),
+`vehWeight` varchar(20),
+`expirationDate` varchar(20),
+`fuelType` varchar(20),
+`mpgCombined` varchar(20),
+`mpgCity` varchar(20),
+`mpgHighway` varchar(20),
+`ignitionKeyCode` varchar(30),
+`doorKeyCode` varchar(30),
+`valetKeyCode` varchar(30),
+`purchaseDate` varchar(30),
+`originalCost` DECIMAL(10,2) DEFAULT '0.00',
+`buyersFee` DECIMAL(10,2) DEFAULT '0.00',
+`lotFee` DECIMAL(10,2) DEFAULT '0.00',
+`addedCosts` DECIMAL(10,2) DEFAULT '0.00',
+`floorPlanCost` DECIMAL(10,2) DEFAULT '0.00',
+`totalCosts` DECIMAL(10,2) DEFAULT '0.00',
+`howDidYouPay` varchar(50),
+`vehicleSource` varchar(50) DEFAULT 'Company',
+`vendorId` int(11) DEFAULT NULL,
+`buyer` varchar(50),
+`notes` varchar(400),
+`isDraft` BOOLEAN DEFAULT 1,
+`draftNumber` varchar(50),
+`datePaid` varchar(50),
+FOREIGN KEY (`vendorId`) REFERENCES `vendorGeneralInformationC` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+
+)ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+
+
+insert into addingVehicle_GeneralSixteen (stockNumber) values (1006);
+mysql> insert into addingVehicle_GeneralSixteen (stockNumber) values (1010);
+Query OK, 1 row affected (0.05 sec)
+
+
+********************************************************************************************
+
+Create database table;
+Insert a record;
+Create backend GET API;
+Test using Postman;
+Create backend POST API;
+Test using Postman;
+if(sucessful results from postman POST API){
+  Integrate with  EJS Template(Frontend);
+  if (successful integration){
+    entire cycle complete
+  }
+  else{
+    Split database and start again.
+  }
+  }
+  else{
+    Split database and start again.
+  }
+
+
+
+  CREATE TABLE `addingVendor_addedCosts` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `date` varchar(30),
+  `cost` DECIMAL(10,2) DEFAULT '0.00',
+  `vehicleId` int(11) DEFAULT NULL,
+  `description` varchar(400),
+  `ticket` varchar(50),
+  `gl` int(11) DEFAULT NULL,
+  `vendorId` int(11) DEFAULT NULL,
+  FOREIGN KEY (`vendorId`) REFERENCES `vendorGeneralInformationC` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  FOREIGN KEY (`vehicleId`) REFERENCES `addingVehicle_GeneralFourteen` (`stockNumber`) ON DELETE SET NULL ON UPDATE CASCADE
+  )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+*********************************************************************************************
+
+
+delimiter #
+create trigger addingVehicle_GeneralTen_TriggerFour after insert on addingVehicle_GeneralFourteen
+for each row
+BEGIN
+set @stNumber = (SELECT stockNumber FROM addingVehicle_GeneralFourteen ORDER BY stockNumber  DESC LIMIT 1);
+insert into addingVendor_addedCosts(date,cost,vehicleId,description,ticket,gl,vendorId) VALUES (new.purchaseDate,new.addedCosts,@stNumber,'vehicle Added costs',uuid(),1,new.vendorId);
+end#
+*****************************************************************************************************************
+mysql> delimiter #
+mysql> create trigger addingVehicle_GeneralTen_TriggerFour after insert on addingVehicle_GeneralFourteen
+    -> for each row
+    -> BEGIN
+    -> set @stNumber = SELECT stockNumber FROM addingVehicle_GeneralFourteen ORDER BY stockNumber  DESC LIMIT 1;
+    -> insert into addingVendor_addedCosts(date,cost,vehicleId,description,ticket,gl,vendorId) VALUES (new.purchaseDate,new.addedCosts,@stNumber,'vehicle Added costs',uuid(),1,new.vendorId);
+    -> end#
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT stockNumber FROM addingVehicle_GeneralFourteen ORDER BY stockNumber  DESC' at line 4
+mysql> delimiter #
+mysql> create trigger addingVehicle_GeneralTen_TriggerFour after insert on addingVehicle_GeneralFourteen
+    -> for each row
+    -> BEGIN
+    -> set @stNumber = (SELECT stockNumber FROM addingVehicle_GeneralFourteen ORDER BY stockNumber  DESC LIMIT 1);
+    -> insert into addingVendor_addedCosts(date,cost,vehicleId,description,ticket,gl,vendorId) VALUES (new.purchaseDate,new.addedCosts,@stNumber,'vehicle Added costs',uuid(),1,new.vendorId);
+    -> end#
+Query OK, 0 rows affected (0.08 sec)
+
+
+
+
+
+
+
+
+
+********************************************************************************************************************8
+insert into addingVehicle_GeneralFourteen(mileage,vendorId) values (1006,1);
+insert into `addingVehicle_GeneralFourteen` (stockNumber) values (1030);
+DROP TRIGGER addingVehicle_GeneralTen_TriggerTwo;
+
+
+SELECT stockNumber FROM addingVehicle_GeneralFourteen ORDER BY stockNumber  DESC LIMIT 1;
+set @stNumber = (SELECT stockNumber FROM addingVehicle_GeneralFourteen ORDER BY stockNumber  DESC LIMIT 1);
+
+| addingVehicle_GeneralTen_TriggerThree | INSERT | addingVendor_addedCosts | BEGIN
+set @sumAddedCosts = (select SUM(cost) FROM addingVendor_addedCosts);
+update addingVendor_GLPostsOne SET date = new.date, amount = @sumAddedCosts, referenceOrCheckNumber = 'VALUE ADDED COSTS', description = 'Description' WHERE id =1;
+end | AFTER  | 2019-12-30 18:06:05.22 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION | root@localhost | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
++---------------------------------------+--------+-------------------------+----------------------------------------------------------------
+
+
+
+CREATE TABLE `addingVehicle_GeneralSeventeen` (
+`stockNumber` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`mileage` int(10) DEFAULT 0,
+`isExempt` BOOLEAN DEFAULT 0,
+`locationCode` varchar(50),
+`mileageIs` varchar(50),
+`newOrUseOrRebuilt` varchar(20),
+`isCertified` BOOLEAN DEFAULT 1,
+`vin` varchar(20),
+`year` varchar(20),
+`transmission` varchar(20),
+`transpeed` varchar(20),
+`driveTrain` varchar(20),
+`make` varchar(20),
+`model` varchar(20),
+`style` varchar(20),
+`bodyType` varchar(20),
+`exteriorColor` varchar(20),
+`exteriorColorTwo` varchar(20),
+`colorDescription` varchar(20),
+`interiorColor` varchar(20),
+`tag` varchar(20),
+`decalNumber` varchar(20),
+`county` varchar(30),
+`titleApplication` varchar(50),
+`stateTitleIn` varchar(30),
+`isTitleIn` BOOLEAN DEFAULT 0,
+`titleNumber` varchar(50),
+`inspectionNumber` varchar(50),
+`inspectionDate` varchar(20),
+`inspectedBy` varchar(50),
+`gpsSerialNumber` varchar(50),
+`engineCylinders` varchar(20),
+`engineSize` varchar(20),
+`vehType` varchar(20),
+`vehCondition` varchar(20),
+`vehWeight` varchar(20),
+`expirationDate` varchar(20),
+`fuelType` varchar(20),
+`mpgCombined` varchar(20),
+`mpgCity` varchar(20),
+`mpgHighway` varchar(20),
+`ignitionKeyCode` varchar(30),
+`doorKeyCode` varchar(30),
+`valetKeyCode` varchar(30),
+`isInspected` BOOLEAN DEFAULT 0,
+`isDuplicateKeys` BOOLEAN DEFAULT 1,
+`purchaseDate` varchar(30),
+`originalCost` DECIMAL(10,2) DEFAULT '0.00',
+`buyersFee` DECIMAL(10,2) DEFAULT '0.00',
+`lotFee` DECIMAL(10,2) DEFAULT '0.00',
+`addedCosts` DECIMAL(10,2) DEFAULT '0.00',
+`floorPlanCost` DECIMAL(10,2) DEFAULT '0.00',
+`totalCosts` DECIMAL(10,2) DEFAULT '0.00',
+`howDidYouPay` varchar(50),
+`vehicleSource` varchar(50) DEFAULT 'Company',
+`vendorId` int(11) DEFAULT NULL,
+`buyer` varchar(50),
+`notes` varchar(400),
+`isDraft` BOOLEAN DEFAULT 1,
+`draftNumber` varchar(50),
+`datePaid` varchar(50)
+)ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+
+
+insert into `addingVehicle_GeneralSeventeen` (stockNumber) values (1030);
+
+delimiter #
+create trigger addingVehicle_GeneralTen_TriggerFive after insert on addingVehicle_GeneralSeventeen
+for each row
+BEGIN
+set @stNumber = (SELECT stockNumber FROM addingVehicle_GeneralSeventeen ORDER BY stockNumber  DESC LIMIT 1);
+insert into addingVendor_addedCosts(date,cost,vehicleId,description,ticket,gl,vendorId) VALUES (new.purchaseDate,new.addedCosts,@stNumber,'vehicle Added costs',uuid(),1,new.vendorId);
+end#
+
+
+mysql> DROP TRIGGER addingVehicle_GeneralTen_TriggerFive;
+Query OK, 0 rows affected (0.00 sec)
+
+
+insert into `addingVehicle_GeneralSeventeen` (mileage) values (1030);
+
+
+
+CREATE TABLE `addingVehicle_GeneralNineteen` (
+`stockNumber` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`mileage` int(10) DEFAULT 0,
+`isExempt` BOOLEAN DEFAULT 0,
+`locationCode` varchar(50),
+`mileageIs` varchar(50),
+`newOrUseOrRebuilt` varchar(20),
+`isCertified` BOOLEAN DEFAULT 1,
+`vin` varchar(20),
+`year` varchar(20),
+`transmission` varchar(20),
+`transpeed` varchar(20),
+`driveTrain` varchar(20),
+`make` varchar(20),
+`model` varchar(20),
+`style` varchar(20),
+`bodyType` varchar(20),
+`exteriorColor` varchar(20),
+`exteriorColorTwo` varchar(20),
+`colorDescription` varchar(20),
+`interiorColor` varchar(20),
+`tag` varchar(20),
+`decalNumber` varchar(20),
+`county` varchar(30),
+`titleApplication` varchar(50),
+`stateTitleIn` varchar(30),
+`isTitleIn` BOOLEAN DEFAULT 0,
+`titleNumber` varchar(50),
+`inspectionNumber` varchar(50),
+`inspectionDate` varchar(20),
+`inspectedBy` varchar(50),
+`gpsSerialNumber` varchar(50),
+`engineCylinders` varchar(20),
+`engineSize` varchar(20),
+`vehType` varchar(20),
+`vehCondition` varchar(20),
+`vehWeight` varchar(20),
+`expirationDate` varchar(20),
+`fuelType` varchar(20),
+`mpgCombined` varchar(20),
+`mpgCity` varchar(20),
+`mpgHighway` varchar(20),
+`ignitionKeyCode` varchar(30),
+`doorKeyCode` varchar(30),
+`valetKeyCode` varchar(30),
+`isInspected` BOOLEAN DEFAULT 0,
+`isDuplicateKeys` BOOLEAN DEFAULT 1,
+`purchaseDate` varchar(30),
+`originalCost` DECIMAL(10,2) DEFAULT '0.00',
+`buyersFee` DECIMAL(10,2) DEFAULT '0.00',
+`lotFee` DECIMAL(10,2) DEFAULT '0.00',
+`addedCosts` DECIMAL(10,2) DEFAULT '0.00',
+`floorPlanCost` DECIMAL(10,2) DEFAULT '0.00',
+`totalCosts` DECIMAL(10,2) DEFAULT '0.00',
+`howDidYouPay` varchar(50),
+`vehicleSource` varchar(50) DEFAULT 'Company',
+`vendorId` varchar(50) DEFAULT '0',
+`buyer` varchar(50),
+`notes` varchar(400),
+`isDraft` BOOLEAN DEFAULT 1,
+`draftNumber` varchar(50),
+`datePaid` varchar(50)
+)ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+
+insert into addingVehicle_GeneralEighteen(mileage,vendorId) values(1030,'1');
+
+delimiter #
+create trigger addingVehicle_GeneralTen_TriggerFive after insert on addingVehicle_GeneralNineteen
+for each row
+BEGIN
+set @stNumber = (SELECT stockNumber FROM addingVehicle_GeneralNineteen ORDER BY stockNumber  DESC LIMIT 1);
+insert into addingVendor_addedCosts(date,cost,vehicleId,description,ticket,gl,vendorId) VALUES (new.purchaseDate,new.addedCosts,@stNumber,'vehicle Added costs',uuid(),1,new.vendorId);
+end#
+
+
+insert into addingVehicle_GeneralNineteen(mileage, vendorId) VALUES (1030,'1');
+
+INSERT INTO addingVehicle_GeneralTen(mileage,locationCode,newOrUseOrRebuilt,vin,year,exteriorColor,inspectionDate,inspectedBy,vehType,purchaseDate,originalCost,buyersFee,addedCosts,floorPlanCost,totalCosts,vendorId) VALUES (0,'ME','new','1HGBH41JX1091002','2018','white','2_10_2018','Mr InspectorTwo','Hatch Back','2_10_2018',16000,200,599,100,17599,1);
+
+
+
+
+delimiter #
+create trigger addingVehicle_GeneralTen_TriggerOne after insert on addingVehicle_GeneralTen
+for each row
+BEGIN
+set @stNumber = (SELECT stockNumber FROM addingVehicle_GeneralTen ORDER BY stockNumber  DESC LIMIT 1);
+insert into addingVendor_addedCosts(date,cost,vehicleId,description,ticket,gl,vendorId) VALUES (new.purchaseDate,new.addedCosts,(SELECT stockNumber FROM addingVehicle_GeneralTen ORDER BY stockNumber  DESC LIMIT 1),'vehicle Added costs',uuid(),1,new.vendorId);
+end#
+
+
+**********************************************************************************************88
+CREATE TABLE `addingVendor_addedCosts` (
+`id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`date` varchar(30),
+`cost` DECIMAL(10,2) DEFAULT '0.00',
+`vehicleId` int(11) DEFAULT NULL,
+`description` varchar(400),
+`ticket` varchar(50),
+`gl` int(11) DEFAULT NULL,
+`vendorId` int(11) DEFAULT NULL,
+FOREIGN KEY (`vendorId`) REFERENCES `vendorGeneralInformationC` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+FOREIGN KEY (`vehicleId`) REFERENCES `addingVehicle_GeneralFourteen` (`stockNumber`) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+*********************************************************************************************
+
+
+delimiter #
+create trigger addingVehicle_GeneralTen_TriggerFour after insert on addingVehicle_GeneralFourteen
+for each row
+BEGIN
+set @stNumber = (SELECT stockNumber FROM addingVehicle_GeneralFourteen ORDER BY stockNumber  DESC LIMIT 1);
+insert into addingVendor_addedCosts(date,cost,vehicleId,description,ticket,gl,vendorId) VALUES (new.purchaseDate,new.addedCosts,@stNumber,'vehicle Added costs',uuid(),1,new.vendorId);
+end#
+
+******************************************************************************************************************88
+mysql> CREATE TABLE `addingVendor_addedCosts` (
+    -> `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    -> `date` varchar(30),
+    -> `cost` DECIMAL(10,2) DEFAULT '0.00',
+    -> `vehicleId` int(11) DEFAULT NULL,
+    -> `description` varchar(400),
+    -> `ticket` varchar(50),
+    -> `gl` int(11) DEFAULT NULL,
+    -> `vendorId` int(11) DEFAULT NULL,
+    -> FOREIGN KEY (`vendorId`) REFERENCES `vendorGeneralInformationC` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+    -> FOREIGN KEY (`vehicleId`) REFERENCES `addingVehicle_GeneralFourteen` (`stockNumber`) ON DELETE SET NULL ON UPDATE CASCADE
+    -> )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+Query OK, 0 rows affected (0.40 sec)
+
+mysql> show triggers;
++--------------------------------------+--------+-------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-------------------------------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| Trigger                              | Event  | Table                         | Statement                                                                                                                                                                                                                                                                                                     | Timing | Created                | sql_mode                                                                                                                                  | Definer        | character_set_client | collation_connection | Database Collation |
++--------------------------------------+--------+-------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-------------------------------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| addingVehicle_GeneralTen_TriggerFour | INSERT | addingVehicle_GeneralFourteen | BEGIN
+set @stNumber = (SELECT stockNumber FROM addingVehicle_GeneralFourteen ORDER BY stockNumber  DESC LIMIT 1);
+insert into addingVendor_addedCosts(date,cost,vehicleId,description,ticket,gl,vendorId) VALUES (new.purchaseDate,new.addedCosts,@stNumber,'vehicle Added costs',uuid(),1,new.vendorId);
+end | AFTER  | 2020-01-11 12:12:22.65 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION | root@localhost | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| addingVehicle_GeneralTen_TriggerOne  | INSERT | addingVehicle_GeneralTen      | BEGIN
+insert into addingVendor_addedCosts(date,cost,vehicleId,description,ticket,gl,vendorId) VALUES (new.purchaseDate,new.addedCosts,new.stockNumber,'vehicle Added costs',uuid(),1,new.vendorId);
+end                                                                                                       | AFTER  | 2020-01-11 13:13:11.43 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION | root@localhost | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
++--------------------------------------+--------+-------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-------------------------------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into addingVehicle_GeneralFourteen(mileage,vendorId) values (1006,1);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+
+
+
+zip -r example.zip original_folder
+zip -r nodeProj.zip /home/krishna/projects/nodeOne/9_1_20
+
+
+Find Branch Details/Address/MICR Code By IFSC Code.
+
+Enter 11 character IFSC Code.
+
+IFSC Code
+
+
+
+IFSC Code:- SYNB0000486, SYNDICATE BANK, BANGALORE NAGARBHAVI ROAD
+
+Bank: SYNDICATE BANK
+
+Address: DR AMBEDKAR INST OF TECHNOLOGY,MALLATHAHALLI,NAGARABHAVI RING ROAD,BANGALORE,BANGALORE URBAN,KARNATAKA,560 056
+State: KARNATAKA
+District: BANGALORE URBAN (Click here for all the branches of "SYNDICATE BANK" in "BANGALORE URBAN" District)
+Branch: BANGALORE NAGARBHAVI ROAD
+Contact:
+
+IFSC Code: SYNB0000486 (used for RTGS, IMPS and NEFT transactions)
+
+Branch Code: Last six characters of IFSC Code represent Branch code.
+
+MICR Code: 560025076

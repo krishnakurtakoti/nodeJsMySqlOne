@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VendorGeneralInformation</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+
+
+<div class=" tab-pane" id="bill" role="tabpanel">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 m-b-60">
+    <table class="table table-xl">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>name</th>
+          <th>isActive</th>
+            <th>street</th>
+            <th>zip</th>
+            <th>city</th>
+          <th>state</th>
+          <th>phone</th>
+          <th>phoneTwo</th>
+            <th>fax</th>
+            <th>contact</th>
+            <th>email</th>
+          <th>categoryId</th>
+          <th>accountNumber</th>
+          <th>defaultGLAccount</th>
+            <th>nameToPrintOnCheckOr1099</th>
+            <th>mailingName</th>
+            <th>mailingStreet</th>
+          <th>mailingCityStateZip</th>
+          <th>socialSecurityNumber</th>
+          <th>isNon1099Vendor</th>
+          <th>notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if(data.length){
+
+        for(var i = 0; i< data.length; i++) {%>
+        <tr>
+
+            <td><%= data[i].id%></td>
+            <td><%= data[i].name%></td>
+            <td><%= data[i].isActive%></td>
+          <td><%= data[i].street%></td>
+          <td><%= data[i].zip%></td>
+          <td><%= data[i].city%></td>
+            <td><%= data[i].state%></td>
+            <td><%= data[i].phone%></td>
+            <td><%= data[i].phoneTwo%></td>
+              <td><%= data[i].fax%></td>
+              <td><%= data[i].contact%></td>
+              <td><%= data[i].Email%></td>
+                <td><%= data[i].categoryId%></td>
+                <td><%= data[i].accountNumber%></td>
+                <td><%= data[i].defaultGLAccount%></td>
+                  <td><%= data[i].nameToPrintOnCheckOr1099%></td>
+                  <td><%= data[i].mailingName%></td>
+                  <td><%= data[i].mailingStreet%></td>
+                    <td><%= data[i].mailingCityStateZip%></td>
+                    <td><%= data[i].socialSecurityNumber%></td>
+                    <td><%= data[i].isNon1099Vendor%></td>
+                    <td><%= data[i].notes%></td>
+
+        </tr>
+        <% }
+
+         }else{ %>
+             <tr>
+                <td colspan="3">No user</td>
+             </tr>
+          <% } %>
+
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

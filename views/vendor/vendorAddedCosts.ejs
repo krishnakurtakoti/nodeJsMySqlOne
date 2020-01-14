@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AddingVendor_BillHistory</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+
+
+<div class=" tab-pane" id="bill" role="tabpanel">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 m-b-60">
+    <table class="table table-xl">
+      <thead>
+        <tr>
+          <th>Id</th>
+
+          <th>Date</th>
+
+          <th>Cost</th>
+          <th>VehicleId</th>
+          <th>Description</th>
+          <th>Ticket</th>
+          <th>Gl</th>
+          <th>VendorId</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <% if(data.length){
+
+        for(var i = 0; i< data.length; i++) {%>
+        <tr>
+
+            <td><%= data[i].id%></td>
+
+          <td><%= data[i].date%></td>
+            <td><%= data[i].cost%></td>
+          <td><%= data[i].vehicleId%></td>
+          <td><%= data[i].description%></td>
+          <td><%= data[i].ticket%></td>
+          <td><%= data[i].gl%></td>
+          <td><%= data[i].vendorId%></td>
+
+      
+
+        </tr>
+        <% }
+
+         }else{ %>
+             <tr>
+                <td colspan="3">No user</td>
+             </tr>
+          <% } %>
+
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
