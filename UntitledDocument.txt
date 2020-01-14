@@ -735,26 +735,4 @@ zip -r example.zip original_folder
 zip -r nodeProj.zip /home/krishna/projects/nodeOne/9_1_20
 
 
-Find Branch Details/Address/MICR Code By IFSC Code.
 
-Enter 11 character IFSC Code.
-
-IFSC Code
-
-
-
-IFSC Code:- SYNB0000486, SYNDICATE BANK, BANGALORE NAGARBHAVI ROAD
-
-Bank: SYNDICATE BANK
-
-Address: DR AMBEDKAR INST OF TECHNOLOGY,MALLATHAHALLI,NAGARABHAVI RING ROAD,BANGALORE,BANGALORE URBAN,KARNATAKA,560 056
-State: KARNATAKA
-District: BANGALORE URBAN (Click here for all the branches of "SYNDICATE BANK" in "BANGALORE URBAN" District)
-Branch: BANGALORE NAGARBHAVI ROAD
-Contact:
-
-IFSC Code: SYNB0000486 (used for RTGS, IMPS and NEFT transactions)
-
-Branch Code: Last six characters of IFSC Code represent Branch code.
-
-MICR Code: 560025076
